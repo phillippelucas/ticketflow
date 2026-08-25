@@ -14,7 +14,7 @@ public static class DependencyInjection
             ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
         services.AddDbContext<TicketFlowDbContext>(options =>
-            options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+            options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 4, 0))));
 
         services.AddScoped<ITicketFlowDbContext>(sp => sp.GetRequiredService<TicketFlowDbContext>());
 
